@@ -1,83 +1,126 @@
-# Netflix Clone
+# Netflix Clone 🍿
 
-This is a full-stack Netflix clone application built with React (Vite) and Node.js (Express).
+A full-stack Netflix clone application built with **React (Vite)**, **Node.js (Express)**, and **MongoDB**.
 
-## Prerequisites
+---
 
-- **Docker Desktop** (or Docker Engine)
-- **Node.js** (LTS version) or **mise** (for environment management)
+## 🛠 Prerequisites
 
-## 🐳 Database Setup (Docker)
+Before you begin, make sure you have the following installed on your machine:
 
-We use Docker Compose to spin up a local MongoDB instance easily. This allows the team to work without setting up a local MongoDB server manually.
+1.  **[Git](https://git-scm.com/downloads)** - Version control.
+2.  **[Docker Desktop](https://www.docker.com/products/docker-desktop/)** - Required to run the local database.
+3.  **Node.js Environment** - Choose ONE method:
+    *   **[mise](https://mise.jdx.dev/)** (Recommended): Automatically manages the correct Node.js version.
+    *   **Node.js (LTS)**: Standard global installation.
 
-### 1. Start the Database
-Run the following command in the project root to download and start the MongoDB container in the background:
+---
+
+## 🏁 Getting Started
+
+Follow these steps to get the project running from scratch.
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd cloneNetflix
+```
+
+### 2. Start the Database 🐳
+
+We use Docker to run MongoDB. This ensures everyone has the exact same database setup.
 
 ```bash
 docker compose up -d
 ```
+> **Note:** This starts MongoDB on port `27017`. To stop it later, use `docker compose down`.
 
-### 2. Check Status
-Verify the database is running:
+### 3. Configure Environment Variables
 
-```bash
-docker ps
+Create a configuration file for the server to connect to the database.
+
+1.  Create a file named `.env` inside the `server/` folder.
+2.  Add the following content:
+
+```env
+PORT=5000
+MONGO_URI=mongodb://root:password@localhost:27017/netflix_clone?authSource=admin
 ```
 
-### 3. Stop the Database
-When you are done, you can stop the container:
+### 4. Install Dependencies
+
+You need to install packages for the root project, client, and server.
+
+#### Option A: Using mise (Recommended)
+If you are using `mise`, it will use the local Node version defined in the project.
 
 ```bash
-docker compose down
+# 1. Install Node.js version
+mise install
+
+# 2. Install all dependencies
+mise x -- npm install
+cd client && mise x -- npm install
+cd ../server && mise x -- npm install
+cd ..
+```
+
+#### Option B: Standard npm
+If you have Node.js installed globally:
+
+```bash
+npm install
+cd client && npm install
+cd ../server && npm install
+cd ..
 ```
 
 ---
 
-## 🚀 Project Setup (npm)
+## 🚀 Running the Application
 
-You can run this project using `mise` (to isolate the node version) or standard `npm`.
+Start both the Client (Frontend) and Server (Backend) with a single command.
 
-### Option A: Using mise (Recommended)
+```bash
+# Using mise
+mise x -- npm run dev
 
-1. **Install Node.js environment**:
-   ```bash
-   mise use node@lts
-   ```
+# OR using standard npm
+npm run dev
+```
 
-2. **Install Dependencies**:
-   You need to install dependencies for the root, client, and server folders.
-   ```bash
-   mise x -- npm install
-   cd client && mise x -- npm install
-   cd ../server && mise x -- npm install
-   cd ..
-   ```
+### Access Points
+*   **📺 Frontend**: [http://localhost:5173](http://localhost:5173)
+*   **🔌 Backend API**: [http://localhost:5000](http://localhost:5000)
 
-3. **Run the App**:
-   This starts both the Client (frontend) and Server (backend) concurrently.
-   ```bash
-   mise x -- npm run dev
-   ```
+---
 
-### Option B: Standard npm (Global)
+## 🛑 How to Stop
 
-If you already have Node.js installed globally:
+1.  **Stop the App**: Press `Ctrl + C` in the terminal where the app is running.
+2.  **Stop the Database**:
+    ```bash
+    docker compose down
+    ```
 
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   cd client && npm install
-   cd ../server && npm install
-   cd ..
-   ```
+---
 
-2. **Run the App**:
-   ```bash
-   npm run dev
-   ```
+## 🤝 Git Workflow (Read This!)
 
-## 📍 Access the App
+To avoid merge conflicts, please follow this workflow every time you work:
 
-- **Frontend**: [http://localhost:5173](http://localhost:5173)
-- **Backend API**: [http://localhost:5000](http://localhost:5000)
+1.  **Start your session:**
+    ```bash
+    git pull origin main
+    ```
+
+2.  **Make your changes.**
+
+3.  **Before you push:**
+    ```bash
+    git add .
+    git commit -m "feat: description of changes"
+    git pull origin main  # <--- CRITICAL: Get updates one last time
+    git push origin main
+    ```
