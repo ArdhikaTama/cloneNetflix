@@ -15,9 +15,9 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black/60 bg-cover bg-center flex items-center justify-center relative shadow-lg" style={{ backgroundImage: "url('https://assets.nflxext.com/ffe/siteui/vlv3/f85718e8-fc6d-4954-bca0-f5eaf78e0842/6122d256-5573-4f9e-a0e2-638706d8a7c2/ID-en-20230918-popsignuptwoweeks-perspective_alpha_website_medium.jpg')" }}>
+    <div className="min-h-screen bg-black bg-cover bg-center flex items-center justify-center relative shadow-lg" style={{ backgroundImage: "url('https://assets.nflxext.com/ffe/siteui/vlv3/f85718e8-fc6d-4954-bca0-f5eaf78e0842/6122d256-5573-4f9e-a0e2-638706d8a7c2/ID-en-20230918-popsignuptwoweeks-perspective_alpha_website_medium.jpg')" }}>
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
       
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-[450px] bg-black/75 p-16 rounded-md shadow-lg text-white">
