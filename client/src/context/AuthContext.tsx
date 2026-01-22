@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
 interface User {
   email: string;
@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, _password: string) => {
     // TODO: Replace dengan API call ke backend Anda
     // const response = await axios.post("http://localhost:5000/api/login", { email, password });
     
